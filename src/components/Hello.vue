@@ -10,7 +10,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'White House'
+      msg: 'Zhong hua'
     }
   }
 }
