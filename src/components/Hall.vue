@@ -2,7 +2,8 @@
   <div class="great">
     <div>{{ msg }}</div>
     <button v-on:click="addCount()">test</button>
-
+    <input v-model='myResult'/>
+    {{myResult}}
     <div id="left" class="left widhei">1</div>
     <div id="right" class="right widhei">2</div>
     <div id="down" class="down widhei">3</div>
@@ -53,11 +54,23 @@
 
   export default{
      name:'great',
-     data(){
+     props: ['mydata'],
+     data:function (){
         return {
-            msg: 'Zhong hua1'
+            msg: 'Zhong hua1',
+            myResult:this.mydata
         }
      },
+     watch: {
+        mydata(val) {
+            this.myResult = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+        },
+        myResult(val) {
+             this.$emit("on-result-change",val);//③组件内对myResult变更后向外部发送事件通知
+
+        }
+    }
+     ,
     methods:{
         addCount:function () {
           var me = new RequestNet();
